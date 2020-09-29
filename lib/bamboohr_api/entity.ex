@@ -4,8 +4,9 @@ defmodule BamboohrApi.Entity do
   """
 
   @callback path(
-    request_type :: atom(), params :: map()
-  ) :: {:ok, String.t()} | {:error, term()}
+              request_type :: atom(),
+              params :: map()
+            ) :: {:ok, String.t()} | {:error, term()}
 
   @callback required_keys(request_type :: atom()) :: list(atom())
 

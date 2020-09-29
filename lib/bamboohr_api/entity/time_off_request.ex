@@ -38,8 +38,13 @@ defmodule BamboohrApi.Entity.TimeOffRequest do
   def resolve_response(:get, %Tesla.Env{status: 200, body: body}) do
     Enum.map(body, &from_resp_params/1)
   end
+
   def resolve_response(:create, %Tesla.Env{status: 201, body: body}) do
     from_resp_params(body)
+  end
+
+  def resolve_response(_, %Tesla.Env{status: status, body: body}) do
+    {:error, {status, body}}
   end
 
   defp from_resp_params(map) do
@@ -68,28 +73,17 @@ defmodule BamboohrApi.Entity.TimeOffRequest do
     request(:create, params, config, :PUT)
   end
 
-  @doc """
-  ## TESTING
-
-  config = BamboohrApi.Config.default()
-
-  {:ok, start} = Date.new(2020, 10, 28)
-
-  {:ok, endd} = Date.new(2020, 11, 2)
-
-  params = %{start: start, end: endd}
-
-  BamboohrApi.Entity.TimeOffRequest.get(params, config)
-  """
   def get(params, config) do
     request(:get, params, config, :GET)
   end
 
   @impl true
   def path(:get, _params), do: {:ok, "/time_off/requests"}
+
   def path(:create, %{employeeId: id}) do
     {:ok, "/employees/#{id}/time_off/request"}
   end
+
   def path(_, _), do: {:error, :path_not_defined}
 
   @impl true

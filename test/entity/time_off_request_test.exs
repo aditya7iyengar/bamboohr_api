@@ -21,7 +21,7 @@ defmodule BamboohrApi.Entity.TimeOffRequestTest do
       :ok
     end
 
-    test "gets time off requests between given dates" do
+    test "gets time off requests between given dates when successful" do
       use_cassette "time_off_request/get/valid" do
         config = BamboohrApi.Config.default()
         {:ok, start} = Date.new(2020, 10, 28)
@@ -31,12 +31,37 @@ defmodule BamboohrApi.Entity.TimeOffRequestTest do
 
         time_off_requests = @module.get(params, config)
 
-        assert time_off_requests == expected_time_off_requests()
+        assert time_off_requests == expected_time_off_requests_from_get()
       end
+    end
+
+    test "handles error when unsuccessful" do
+      use_cassette "time_off_request/get/invalid" do
+        config = BamboohrApi.Config.default()
+        {:ok, start} = Date.new(2020, 10, 28)
+        {:ok, endd} = Date.new(2020, 11, 2)
+
+        params = %{start: start, end: endd}
+
+        {:error, {status, body}} = @module.get(params, config)
+
+        assert status == 404
+        assert body == %{"error" => "Not Found"}
+      end
+    end
+
+    test "returns error when no dates are given" do
+      config = BamboohrApi.Config.default()
+
+      params = %{}
+
+      {:error, reason} = @module.get(params, config)
+
+      assert reason == :required_keys_not_present
     end
   end
 
-  defp expected_time_off_requests do
+  defp expected_time_off_requests_from_get do
     [
       %BamboohrApi.Entity.TimeOffRequest{
         actions: %{
@@ -72,7 +97,9 @@ defmodule BamboohrApi.Entity.TimeOffRequestTest do
           "status" => "requested"
         },
         type: %{
-          "icon" => "time-off-calendar", "id" => "83", "name" => "Vacation"
+          "icon" => "time-off-calendar",
+          "id" => "83",
+          "name" => "Vacation"
         },
         usedYearToDate: nil
       },
@@ -109,7 +136,9 @@ defmodule BamboohrApi.Entity.TimeOffRequestTest do
           "status" => "approved"
         },
         type: %{
-          "icon" => "time-off-calendar", "id" => "83", "name" => "Vacation"
+          "icon" => "time-off-calendar",
+          "id" => "83",
+          "name" => "Vacation"
         },
         usedYearToDate: nil
       }
