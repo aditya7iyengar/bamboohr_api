@@ -1,0 +1,32 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Accept": "application/json",
+        "content-type": "application/json",
+        "authorization": "Basic caput-draconis"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.bamboohr.com/api/gateway.php/hogwarts/v1/time_off/requests?end=2020-11-02&start=2020-10-28"
+    },
+    "response": {
+      "binary": false,
+      "body": "[{\"id\":\"2020\",\"employeeId\":\"1\",\"status\":{\"lastChanged\":\"2020-09-21\",\"lastChangedByUserId\":\"1\",\"status\":\"requested\"},\"name\":\"Albus Dumbledore\",\"start\":\"2020-10-29\",\"end\":\"2020-11-02\",\"created\":\"2020-09-21\",\"type\":{\"id\":\"83\",\"name\":\"Vacation\",\"icon\":\"time-off-calendar\"},\"amount\":{\"unit\":\"days\",\"amount\":\"3\"},\"actions\":{\"view\":true,\"edit\":true,\"cancel\":true,\"approve\":true,\"deny\":true,\"bypass\":true},\"dates\":{\"2020-10-29\":\"1\",\"2020-10-30\":\"1\",\"2020-10-31\":\"0\",\"2020-11-01\":\"0\",\"2020-11-02\":\"1\"},\"notes\":{\"employee\":\"Need to hunt Horcruxes! \"}},{\"id\":\"2021\",\"employeeId\":\"2222\",\"status\":{\"lastChanged\":\"2020-09-21\",\"lastChangedByUserId\":\"2222\",\"status\":\"approved\"},\"name\":\"Harry Potter\",\"start\":\"2020-10-30\",\"end\":\"2020-11-02\",\"created\":\"2020-09-21\",\"type\":{\"id\":\"83\",\"name\":\"Vacation\",\"icon\":\"time-off-calendar\"},\"amount\":{\"unit\":\"days\",\"amount\":\"2\"},\"actions\":{\"view\":true,\"edit\":true,\"cancel\":true,\"approve\":false,\"deny\":false,\"bypass\":false},\"dates\":{\"2020-10-30\":\"1\",\"2020-10-31\":\"0\",\"2020-11-01\":\"0\",\"2020-11-02\":\"1\"},\"notes\":[]}]",
+      "headers": {
+        "Date": "Tue, 29 Sep 2020 21:45:16 GMT",
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Server": "nginx",
+        "Strict-Transport-Security": "max-age=31536000; includeSubdomains;",
+        "Vary": "Authorization,User-Agent",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
