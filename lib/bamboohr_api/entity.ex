@@ -104,6 +104,36 @@ defmodule BamboohrApi.Entity do
             false -> {:error, :invalid_action}
           end
         end
+
+        @impl true
+        def resolve_response(action_name, %Tesla.Env{} = response) do
+          action_params = Keyword.get(actions(), action_name)
+
+          success =
+            action_params
+            |> Keyword.get(:expected_resp_codes, [])
+            |> Enum.member?(response.status)
+
+          case success do
+            true -> from_resp_params(response.body)
+            false -> {:error, {response.status, response.body}}
+          end
+        end
+
+        defp from_resp_params(list) when is_list(list) do
+          Enum.map(list, &from_resp_params/1)
+        end
+
+        defp from_resp_params(%{} = map) do
+          atom_keys_map =
+            map
+            |> Enum.map(fn {k, v} -> {String.to_atom(k), v} end)
+            |> Enum.into(%{})
+
+          struct!(__MODULE__, atom_keys_map)
+        end
+
+        defoverridable resolve_response: 2
       end
 
     asts =
