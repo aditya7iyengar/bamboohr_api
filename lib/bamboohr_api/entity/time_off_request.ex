@@ -56,19 +56,6 @@ defmodule BamboohrApi.Entity.TimeOffRequest do
     struct!(__MODULE__, atom_keys_map)
   end
 
-  @doc """
-  ## TESTING
-
-  config = BamboohrApi.Config.default()
-
-  {:ok, start} = Date.new(2020, 10, 31)
-
-  {:ok, endd} = Date.new(2020, 11, 1)
-
-  params = %{start: start, end: endd, employeeId: 326, status: "requested", timeOffTypeId: 83, notes: [%{from: "employee", note: "Testing API"}]}
-
-  BamboohrApi.Entity.TimeOffRequest.create(params, config)
-  """
   def create(params, config) do
     request(:create, params, config, :PUT)
   end
@@ -88,6 +75,6 @@ defmodule BamboohrApi.Entity.TimeOffRequest do
 
   @impl true
   def required_keys(:get), do: ~w(start end)a
-  def required_keys(:create), do: ~w(start end employeeId)a
+  def required_keys(:create), do: ~w(start end employeeId timeOffTypeId status)a
   def required_keys(_), do: []
 end

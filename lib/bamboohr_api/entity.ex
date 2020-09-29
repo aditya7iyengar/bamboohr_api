@@ -35,7 +35,7 @@ defmodule BamboohrApi.Entity do
       end
 
       defp http(:POST, client, path, params) do
-        Tesla.put(client, path, params)
+        Tesla.post(client, path, params)
       end
 
       defp http(:GET, client, path, params) do
