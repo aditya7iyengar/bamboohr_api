@@ -214,7 +214,9 @@ defmodule BamboohrApi.Entity.TimeOffRequestTest do
         "view" => true
       },
       amount: %{"amount" => "0", "unit" => "days"},
-      approvers: [%{"displayName" => "Minerva McGonagall", "employeeId" => "2020", "userId" => "12"}],
+      approvers: [
+        %{"displayName" => "Minerva McGonagall", "employeeId" => "2020", "userId" => "12"}
+      ],
       balanceOnDateOfRequest: 0,
       comments: [],
       created: "2020-09-29",

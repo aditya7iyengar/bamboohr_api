@@ -4,35 +4,43 @@ defmodule BamboohrApi.Entity.TimeOffRequest do
   """
 
   use BamboohrApi.Entity,
+    enforce_keys: ~w(
+      actions
+      amount
+      created
+      dates
+      employeeId
+      end
+      id
+      name
+      start
+      status
+      type
+    )a,
+    optional_keys: ~w(
+      approvers
+      notes
+      balanceOnDateOfRequest
+      comments
+      policyType
+      usedYearToDate
+    )a,
     actions: [
-      {:get, method: :GET, expected_resp_codes: [200]},
-      {:create, method: :PUT, expected_resp_codes: [201]}
+      get: [
+        method: :GET,
+        expected_resp_codes: [200],
+        path_fn: fn _params -> "/time_off/requests" end,
+        required_keys: ~w(start end)a
+      ],
+      create: [
+        method: :PUT,
+        expected_resp_codes: [201],
+        path_fn: fn %{employeeId: id} ->
+          "/employees/#{id}/time_off/request"
+        end,
+        required_keys: ~w(start end employeeId timeOffTypeId status)a
+      ]
     ]
-
-  @enforce_keys ~w(
-    actions
-    amount
-    created
-    dates
-    employeeId
-    end
-    id
-    name
-    start
-    status
-    type
-  )a
-
-  @optional_keys ~w(
-    approvers
-    notes
-    balanceOnDateOfRequest
-    comments
-    policyType
-    usedYearToDate
-  )a
-
-  defstruct @enforce_keys ++ @optional_keys
 
   @impl true
   def resolve_response(:get, %Tesla.Env{status: 200, body: body}) do
@@ -55,26 +63,4 @@ defmodule BamboohrApi.Entity.TimeOffRequest do
 
     struct!(__MODULE__, atom_keys_map)
   end
-
-  def create(params, config) do
-    request(:create, params, config, :PUT)
-  end
-
-  def get(params, config) do
-    request(:get, params, config, :GET)
-  end
-
-  @impl true
-  def path(:get, _params), do: {:ok, "/time_off/requests"}
-
-  def path(:create, %{employeeId: id}) do
-    {:ok, "/employees/#{id}/time_off/request"}
-  end
-
-  def path(_, _), do: {:error, :path_not_defined}
-
-  @impl true
-  def required_keys(:get), do: ~w(start end)a
-  def required_keys(:create), do: ~w(start end employeeId timeOffTypeId status)a
-  def required_keys(_), do: []
 end
