@@ -1,0 +1,33 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Accept": "application/json",
+        "content-type": "application/json",
+        "authorization": "Basic caput-draconis"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.bamboohr.com/api/gateway.php/hogwarts/v1/employees/0/?fields=birthday%2CfirstName%2Cid%2ClastName%2CmiddleName%2CpayPer%2CpayRate%2CpreferredName%2CworkEmail&id=0"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"id\":\"2020\",\"birthday\":\"10-10\",\"firstName\":\"Harry\",\"lastName\":\"Potter\",\"middleName\":\"James\",\"payPer\":null,\"payRate\":null,\"preferredName\":null,\"workEmail\":\"harry.potter@hogwarts.com\"}",
+      "headers": {
+        "Date": "Wed, 30 Sep 2020 13:32:28 GMT",
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Server": "nginx",
+        "Cache-Control": "no-cache",
+        "Strict-Transport-Security": "max-age=31536000; includeSubdomains;",
+        "Vary": "Authorization,User-Agent",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
