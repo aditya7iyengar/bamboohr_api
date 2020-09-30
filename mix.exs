@@ -3,27 +3,33 @@ defmodule BamboohrApi.MixProject do
 
   @version "0.0.1"
   @source "https://github.com/aditya7iyengar/bamboohr_api"
+  @description """
+  An Elixir wrapper around the BambooHR REST API
+  """
 
   def project do
     [
       app: :bamboohr_api,
+      description: @description,
       deps: deps(),
+      docs: [
+        # The main page in the docs
+        main: "BamboohrApi",
+        extras: ["README.md"]
+      ],
       elixir: "~> 1.10",
+      homepage_url: @source,
+      name: "BambooHR API",
+      package: package(),
       preferred_cli_env: [
         coveralls: :test,
         "coveralls.detail": :test,
         "coveralls.post": :test,
         "coveralls.html": :test
       ],
+      source_url: @source,
       start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
-      name: "BambooHR API",
-      source_url: @source,
-      homepage_url: @source,
-      docs: [
-        main: "BamboohrApi", # The main page in the docs
-        extras: ["README.md"]
-      ],
       version: @version
     ]
   end
@@ -31,6 +37,15 @@ defmodule BamboohrApi.MixProject do
   def application do
     [
       extra_applications: [:logger]
+    ]
+  end
+
+  def package do
+    [
+      files: ["lib", "mix.exs", "README.md"],
+      maintainers: ["Adi Iyengar"],
+      licenses: ["MIT"],
+      links: %{"Github" => @source}
     ]
   end
 
