@@ -26,7 +26,7 @@ defmodule BamboohrApi.Entity.TimeOffRequest do
       usedYearToDate
     )a,
     actions: [
-      get: [
+      list: [
         method: :GET,
         expected_resp_codes: [200],
         path_fn: fn _params -> "/time_off/requests" end,

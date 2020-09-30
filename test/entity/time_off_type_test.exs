@@ -15,25 +15,25 @@ defmodule BamboohrApi.Entity.TimeOffTypeTest do
     end
   end
 
-  describe ".get/2" do
+  describe ".list/2" do
     setup do
       ExVCR.Config.cassette_library_dir("fixture/vcr_cassettes")
       :ok
     end
 
-    test "gets time off types between given dates when successful" do
-      use_cassette "time_off_type/get/valid" do
+    test "lists time off types between given dates when successful" do
+      use_cassette "time_off_type/list/valid" do
         config = BamboohrApi.Config.default()
-        time_off_types = @module.get(%{}, config)
+        time_off_types = @module.list(%{}, config)
 
-        assert time_off_types == expected_time_off_types_from_get()
+        assert time_off_types == expected_time_off_types_from_list()
       end
     end
 
     test "handles error when unsuccessful" do
-      use_cassette "time_off_type/get/invalid" do
+      use_cassette "time_off_type/list/invalid" do
         config = BamboohrApi.Config.default()
-        {:error, {status, body}} = @module.get(%{}, config)
+        {:error, {status, body}} = @module.list(%{}, config)
 
         assert status == 404
         assert body == %{"error" => "Not Found"}
@@ -41,7 +41,7 @@ defmodule BamboohrApi.Entity.TimeOffTypeTest do
     end
   end
 
-  defp expected_time_off_types_from_get do
+  defp expected_time_off_types_from_list do
     [
       %BamboohrApi.Entity.TimeOffType{
         color: "4aada4",

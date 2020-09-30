@@ -69,17 +69,98 @@ defmodule BamboohrApi.Entity.EmployeeTest do
     end
   end
 
+  describe ".list/2" do
+    setup do
+      ExVCR.Config.cassette_library_dir("fixture/vcr_cassettes")
+      :ok
+    end
+
+    test "lists employee with their respective fields" do
+      use_cassette "employee/list/valid" do
+        config = BamboohrApi.Config.default()
+
+        params = %{}
+
+        employees = @module.list(params, config)
+
+        assert employees == expected_employee_from_list()
+      end
+    end
+
+    test "handles error when unsuccessful" do
+      use_cassette "employee/list/invalid" do
+        config = BamboohrApi.Config.default()
+
+        params = %{}
+        {:error, {status, body}} = @module.list(params, config)
+
+        assert status == 404
+        assert body == %{"error" => "Not Found"}
+      end
+    end
+  end
+
   defp expected_employee_from_get do
     %BamboohrApi.Entity.Employee{
       birthday: "10-10",
+      canUploadPhoto: nil,
+      department: nil,
+      displayName: nil,
+      division: nil,
+      facebook: nil,
       firstName: "Harry",
+      gender: nil,
       id: "2020",
+      jobTitle: nil,
       lastName: "Potter",
+      linkedIn: nil,
+      location: nil,
       middleName: "James",
+      mobilePhone: nil,
       payPer: nil,
       payRate: nil,
+      photoUploaded: nil,
+      photoUrl: nil,
       preferredName: nil,
-      workEmail: "harry.potter@hogwarts.com"
+      skypeUsername: nil,
+      supervisor: nil,
+      twitterFeed: nil,
+      workEmail: "harry.potter@hogwarts.com",
+      workPhone: nil,
+      workPhoneExtension: nil
     }
+  end
+
+  defp expected_employee_from_list do
+    [
+      %BamboohrApi.Entity.Employee{
+        birthday: nil,
+        canUploadPhoto: nil,
+        department: "Student",
+        displayName: "The boy who lived",
+        division: "Wizard",
+        facebook: nil,
+        firstName: "Harry",
+        gender: "Male",
+        id: "2020",
+        jobTitle: "Wizard",
+        lastName: "Potter",
+        linkedIn: nil,
+        location: "London",
+        middleName: nil,
+        mobilePhone: nil,
+        payPer: nil,
+        payRate: nil,
+        photoUploaded: false,
+        photoUrl: nil,
+        preferredName: nil,
+        skypeUsername: nil,
+        supervisor: nil,
+        twitterFeed: nil,
+        workEmail: "harry.potter@hogwarts.com",
+        workPhone: nil,
+        workPhoneExtension: nil
+      }
+    ]
   end
 end

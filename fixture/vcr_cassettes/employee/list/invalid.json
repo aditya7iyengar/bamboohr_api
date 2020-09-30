@@ -1,0 +1,32 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Accept": "application/json",
+        "content-type": "application/json",
+        "authorization": "Basic caput-draconis"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.bamboohr.com/api/gateway.php/hogwarts/v1/employees/directory?"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"error\":\"Not Found\"}",
+      "headers": {
+        "Date": "Tue, 29 Sep 2020 21:45:16 GMT",
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Server": "nginx",
+        "Strict-Transport-Security": "max-age=31536000; includeSubdomains;",
+        "Vary": "Authorization,User-Agent",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "status_code": 404,
+      "type": "ok"
+    }
+  }
+]

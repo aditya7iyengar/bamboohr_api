@@ -15,35 +15,35 @@ defmodule BamboohrApi.Entity.TimeOffRequestTest do
     end
   end
 
-  describe ".get/2" do
+  describe ".list/2" do
     setup do
       ExVCR.Config.cassette_library_dir("fixture/vcr_cassettes")
       :ok
     end
 
-    test "gets time off requests between given dates when successful" do
-      use_cassette "time_off_request/get/valid" do
+    test "lists time off requests between given dates when successful" do
+      use_cassette "time_off_request/list/valid" do
         config = BamboohrApi.Config.default()
         {:ok, start} = Date.new(2020, 10, 28)
         {:ok, endd} = Date.new(2020, 11, 2)
 
         params = %{start: start, end: endd}
 
-        time_off_requests = @module.get(params, config)
+        time_off_requests = @module.list(params, config)
 
-        assert time_off_requests == expected_time_off_requests_from_get()
+        assert time_off_requests == expected_time_off_requests_from_list()
       end
     end
 
     test "handles error when unsuccessful" do
-      use_cassette "time_off_request/get/invalid" do
+      use_cassette "time_off_request/list/invalid" do
         config = BamboohrApi.Config.default()
         {:ok, start} = Date.new(2020, 10, 28)
         {:ok, endd} = Date.new(2020, 11, 2)
 
         params = %{start: start, end: endd}
 
-        {:error, {status, body}} = @module.get(params, config)
+        {:error, {status, body}} = @module.list(params, config)
 
         assert status == 404
         assert body == %{"error" => "Not Found"}
@@ -55,7 +55,7 @@ defmodule BamboohrApi.Entity.TimeOffRequestTest do
 
       params = %{}
 
-      {:error, reason} = @module.get(params, config)
+      {:error, reason} = @module.list(params, config)
 
       assert reason == :required_keys_not_present
     end
@@ -119,7 +119,7 @@ defmodule BamboohrApi.Entity.TimeOffRequestTest do
     end
   end
 
-  defp expected_time_off_requests_from_get do
+  defp expected_time_off_requests_from_list do
     [
       %BamboohrApi.Entity.TimeOffRequest{
         actions: %{

@@ -12,7 +12,7 @@ defmodule BamboohrApi.Entity.TimeOffType do
       icon
     )a,
     actions: [
-      get: [
+      list: [
         method: :GET,
         expected_resp_codes: [200],
         path_fn: fn _params -> "meta/time_off/types" end
@@ -20,8 +20,8 @@ defmodule BamboohrApi.Entity.TimeOffType do
     ]
 
   @impl true
-  def resolve_response(action_name, %Tesla.Env{} = response) do
-    action_params = Keyword.get(actions(), action_name)
+  def resolve_response(:list, %Tesla.Env{} = response) do
+    action_params = Keyword.get(actions(), :list)
 
     success =
       action_params
@@ -32,5 +32,9 @@ defmodule BamboohrApi.Entity.TimeOffType do
       true -> from_resp_params(response.body["timeOffTypes"])
       false -> {:error, {response.status, response.body}}
     end
+  end
+
+  def resolve_response(action_name, resp) do
+    super(action_name, resp)
   end
 end

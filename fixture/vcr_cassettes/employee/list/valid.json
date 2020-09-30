@@ -1,0 +1,32 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Accept": "application/json",
+        "content-type": "application/json",
+        "authorization": "Basic caput-draconis"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.bamboohr.com/api/gateway.php/hogwarts/v1/employees/directory?"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"fields\":[{\"id\":\"displayName\",\"type\":\"text\",\"name\":\"Display name\"},{\"id\":\"firstName\",\"type\":\"text\",\"name\":\"First name\"},{\"id\":\"lastName\",\"type\":\"text\",\"name\":\"Last name\"},{\"id\":\"preferredName\",\"type\":\"text\",\"name\":\"Preferred name\"},{\"id\":\"gender\",\"type\":\"gender\",\"name\":\"Gender\"},{\"id\":\"jobTitle\",\"type\":\"list\",\"name\":\"Job title\"},{\"id\":\"workPhone\",\"type\":\"text\",\"name\":\"Work Phone\"},{\"id\":\"mobilePhone\",\"type\":\"text\",\"name\":\"Mobile Phone\"},{\"id\":\"workEmail\",\"type\":\"email\",\"name\":\"Work Email\"},{\"id\":\"department\",\"type\":\"list\",\"name\":\"Department\"},{\"id\":\"location\",\"type\":\"list\",\"name\":\"Location\"},{\"id\":\"division\",\"type\":\"list\",\"name\":\"Division\"},{\"id\":\"linkedIn\",\"type\":\"text\",\"name\":\"LinkedIn URL\"},{\"id\":\"twitterFeed\",\"type\":\"text\",\"name\":\"Twitter Feed\"},{\"id\":\"workPhoneExtension\",\"type\":\"text\",\"name\":\"Work Ext.\"},{\"id\":\"supervisor\",\"type\":\"employee\",\"name\":\"Manager\"},{\"id\":\"photoUploaded\",\"type\":\"bool\",\"name\":\"Employee photo exists\"},{\"id\":\"photoUrl\",\"type\":\"url\",\"name\":\"Employee photo url\"},{\"type\":\"bool\",\"name\":\"\",\"id\":\"canUploadPhoto\"}],\"employees\":[{\"id\":\"2020\",\"displayName\":\"The boy who lived\",\"firstName\":\"Harry\",\"lastName\":\"Potter\",\"preferredName\":null,\"gender\":\"Male\",\"jobTitle\":\"Wizard\",\"workPhone\":null,\"mobilePhone\":null,\"workEmail\":\"harry.potter@hogwarts.com\",\"department\":\"Student\",\"location\":\"London\",\"division\":\"Wizard\",\"linkedIn\":null,\"twitterFeed\":null,\"workPhoneExtension\":null,\"supervisor\":null,\"photoUploaded\":false,\"photoUrl\":null,\"canUploadPhoto\":null}]}",
+      "headers": {
+        "Date": "Wed, 30 Sep 2020 15:54:20 GMT",
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Server": "nginx",
+        "Strict-Transport-Security": "max-age=31536000; includeSubdomains;",
+        "Vary": "Authorization,User-Agent",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
