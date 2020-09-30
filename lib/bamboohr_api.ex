@@ -1,5 +1,5 @@
 defmodule BamboohrApi do
-  @moduledoc false
-
-  # TODO: Add better api
+  @moduledoc """
+  Cleaner API to interact with entities
+  """
 end
