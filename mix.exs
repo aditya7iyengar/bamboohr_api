@@ -8,7 +8,14 @@ defmodule BamboohrApi.MixProject do
       app: :bamboohr_api,
       deps: deps(),
       elixir: "~> 1.10",
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ],
       start_permanent: Mix.env() == :prod,
+      test_coverage: [tool: ExCoveralls],
       version: @version
     ]
   end
@@ -21,6 +28,7 @@ defmodule BamboohrApi.MixProject do
 
   defp deps do
     [
+      {:excoveralls, "~> 0.13.2", only: :test},
       {:exvcr, "~> 0.11.2", only: :test},
       {:hackney, "~> 1.16.0"},
       {:jason, "~> 1.2.2"},

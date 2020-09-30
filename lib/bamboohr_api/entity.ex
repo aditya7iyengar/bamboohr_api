@@ -17,7 +17,7 @@ defmodule BamboohrApi.Entity do
     enforce_keys = Keyword.get(opts, :enforce_keys, [])
     optional_keys = Keyword.get(opts, :optional_keys, [])
 
-    ast =
+    helpers_ast =
       quote do
         defp required_keys_present?(action, params) do
           action_params = Keyword.get(actions(), action)
@@ -43,7 +43,7 @@ defmodule BamboohrApi.Entity do
     [
       define_struct(enforce_keys, optional_keys),
       add_behaviour(actions),
-      ast
+      helpers_ast
     ] ++ define_action_functions(actions)
   end
 
